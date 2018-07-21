@@ -34,9 +34,11 @@ public class LoginController extends HttpServlet {
 		login.setPassword(req.getParameter("password"));
 		User user = userService.validateUser(login);
 		if (null != user) {
+			req.setAttribute("firstname", user.getFirstname() + " " + user.getLastname());
 			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/welcome.jsp");
 			rd.forward(req, resp);
 		} else {
+			req.setAttribute("message", "Try it again buddy");
 			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/login.jsp");
 			rd.forward(req, resp);
 		}

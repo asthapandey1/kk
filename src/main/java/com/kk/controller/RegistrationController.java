@@ -39,8 +39,10 @@ public class RegistrationController extends HttpServlet {
 		user.setAddress(req.getParameter("address"));
 		user.setRole(req.getParameter("password"));
 
-		userService.register(user);
-		RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/welcome.jsp");
-		rd.forward(req, resp);
+		if (userService.register(user)) {
+			req.setAttribute("firstname", user.getFirstname() + " " + user.getLastname());
+			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/welcome.jsp");
+			rd.forward(req, resp);
+		}
 	}
 }

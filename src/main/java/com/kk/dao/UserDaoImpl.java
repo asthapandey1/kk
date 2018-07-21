@@ -10,6 +10,11 @@ import java.sql.Statement;
 import com.kk.entity.Login;
 import com.kk.entity.User;
 
+/**
+ * Mysql implementation
+ * @author harshit.pandey
+ *
+ */
 public class UserDaoImpl implements UserDao {
 
 	private final String sql = "insert into user values(?,?,?,?,?,?,?,?)";
