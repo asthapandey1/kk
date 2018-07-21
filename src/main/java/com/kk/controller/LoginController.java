@@ -3,7 +3,6 @@ package com.kk.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kk.entity.Login;
 import com.kk.entity.User;
 import com.kk.service.UserService;
+import com.kk.service.UserServiceImpl;
 
 @Controller
 public class LoginController {
-	@Autowired
-	UserService userService;
+	UserService userService = new UserServiceImpl();
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {

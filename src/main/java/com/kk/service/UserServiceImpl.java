@@ -1,15 +1,13 @@
 package com.kk.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.kk.dao.UserDao;
+import com.kk.dao.UserDaoImpl;
 import com.kk.entity.Login;
 import com.kk.entity.User;
 
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	private UserDao userDao;
+	private UserDao userDao = new UserDaoImpl();
 
 	public boolean register(User user) {
 		boolean result = userDao.register(user);

@@ -7,20 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import com.kk.entity.Login;
 import com.kk.entity.User;
 
 public class UserDaoImpl implements UserDao {
 
-	@Autowired
-	DataSource datasource;
-	@Autowired
-	JdbcTemplate jdbcTemplate;
 	private final String sql = "insert into user values(?,?,?,?,?,?,?,?)";
 
 	public boolean register(User user) {
