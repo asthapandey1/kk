@@ -37,9 +37,10 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public User validateUser(Login login) {
-		String sql = "select * from user where username='" + login.getUsername() + "' and password='"
+		String sql = "select * from user where id='" + login.getUsername() + "' and password='"
 				+ login.getPassword() + "'";
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kk", "root", null);
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
@@ -53,9 +54,13 @@ public class UserDaoImpl implements UserDao {
 				user.setPhone(rs.getString("phonenumber"));
 				user.setAddress(rs.getString("address"));
 				user.setRole(rs.getString("role"));
+				return user;
 			} else
 				return null;
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

@@ -1,13 +1,14 @@
 package com.kk.controller;
 
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kk.entity.Login;
 import com.kk.entity.User;
@@ -15,28 +16,29 @@ import com.kk.service.UserService;
 import com.kk.service.UserServiceImpl;
 
 @Controller
-public class LoginController {
+public class LoginController extends HttpServlet {
 	UserService userService = new UserServiceImpl();
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView("login");
-		mav.addObject("login", new Login());
-		return mav;
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/login.jsp");
+		rd.forward(req, resp);
 	}
 
-	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-	public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("login") Login login) {
-		ModelAndView mav = null;
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Login login = new Login();
+		login.setUsername(req.getParameter("username"));
+		login.setPassword(req.getParameter("password"));
 		User user = userService.validateUser(login);
 		if (null != user) {
-			mav = new ModelAndView("welcome");
-			mav.addObject("firstname", user.getFirstname());
+			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/welcome.jsp");
+			rd.forward(req, resp);
 		} else {
-			mav = new ModelAndView("login");
-			mav.addObject("message", "Username or Password is wrong!!");
+			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/login.jsp");
+			rd.forward(req, resp);
 		}
-		return mav;
 	}
 }
