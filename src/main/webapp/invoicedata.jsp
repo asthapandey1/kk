@@ -5,11 +5,11 @@
             <title>Registration</title>
         </head>
         <body>
-            <form id="regForm" modelAttribute="user" action="registerProcess" method="post">
+            <form id="regForm" modelAttribute="user" action="generate-invoice" method="post">
                 <table align="center">
                     <tr>
                         <td>
-                            <label path="username">Username</label>
+                            <label path="Name">Name</label>
                         </td>
                         <td>
                             <input path="username" name="username" id="username" />
@@ -17,26 +17,18 @@
                     </tr>
                     <tr>
                         <td>
-                            <label path="password">Password</label>
+                            <label path="Product">Product</label>
                         </td>
                         <td>
-                            <input path="password" name="password" id="password" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label path="firstname">FirstName</label>
-                        </td>
-                        <td>
-                            <input path="firstname" name="firstname" id="firstname" />
+                            <input path="productName" name="productName" id="productName" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label path="lastname">LastName</label>
+                            <label path="Price">Price</label>
                         </td>
                         <td>
-                            <input path="lastname" name="lastname" id="lastname" />
+                            <input path="price" name="price" id="price" />
                         </td>
                     </tr>
                     <tr>
@@ -64,9 +56,17 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            <label path="Date Of Purchase">Date Of Purchase</label>
+                        </td>
+                        <td>
+                            <input path="dop" name="dop" id="dop" />
+                        </td>
+                    </tr>
+                    <tr>
                         <td></td>
                         <td>
-                            <button id="register" name="register">Register</button>
+                            <button id="generate" name="generate">Generate Invoice</button>
                         </td>
                     </tr>
                     <tr></tr>

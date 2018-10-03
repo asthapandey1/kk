@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDao {
 	public boolean register(User user) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kk", "root", null);
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kk", "root", "password");
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, user.getUsername());
 			stmt.setString(2, user.getPassword());
@@ -34,7 +34,7 @@ public class UserDaoImpl implements UserDao {
 			stmt.setString(8, user.getRole());
 			boolean result = stmt.execute();
 			con.close();
-			return result;
+			return true;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -46,7 +46,7 @@ public class UserDaoImpl implements UserDao {
 				+ login.getPassword() + "'";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kk", "root", null);
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kk", "root", "password");
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			if (rs.next()) {
